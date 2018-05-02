@@ -30,7 +30,7 @@ class DBConn {
     createJVM() {
         if (!jinst.isJvmCreated()) {
             jinst.addOption("-Xrs");
-            jinst.setupClasspath(['./lib/exajdbc.jar']);
+            jinst.setupClasspath(['./node_modules/exa-node/lib/exajdbc.jar']);
             return true;
         }
     }
