@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
-var ExaNode = require('../exa-node.js');
+var DBConn = require('../exa-node.js');
 var numFormatter = require('../index');
 
 describe('#numFormatter', function () {
@@ -45,7 +45,7 @@ describe('#numFormatter', function () {
         expect(result).to.equal('12,345,678');
     });
 
-    it('tests db connection', function (done) {
+    /*it('tests db connection', function (done) {
         ExaNode.getAllUsers(function (err, results) {
             if (err) {
                 console.log('Scotty, we have an error!!');
@@ -62,7 +62,40 @@ describe('#numFormatter', function () {
         });
         //expect(results[0].USER_NAME).to.equal('SYS');
 
+    });*/
+
+
+});
+
+describe('#Checking DB relations:', function () {
+    it('checking config example', function () {
+        var testdbconn = new DBConn("192.168.56.101", "8563", "sys", "exasol");
+        expect(testdbconn.ip).to.equal('192.168.56.101');
+        expect(testdbconn.port).to.equal('8563');
+        expect(testdbconn.username).to.equal('sys');
+        expect(testdbconn.password).to.equal('exasol');
+
     });
 
 
+
+    it('Checking Test Tables', function (done) {
+        var testdbconn = new DBConn("192.168.56.101", "8563", "sys", "exasol");
+        testdbconn.getAllUsers(function (err, results) {
+            if (err) {
+                console.log('Scotty, we have an error!!');
+                return;
+            }
+            if (results != null) {
+
+                expect(results[0].USER_NAME).to.equal('SYS');
+                done();
+
+
+            }
+
+        });
+        // expect(testdbconn.initializeConnection()).to.equal(null);
+
+    });
 });
