@@ -14,18 +14,11 @@ A small module to interface the database Exasol using JDBC
 
 ## Usage
 
-    var numFormatter = require('@jdaudier/number-formatter');
-
-    var formattedNum = numFormatter(35666);
+    var EXAConn = require('exa-node');
+    var testdbconn = new EXAConn("192.168.56.101", "8563", "sys", "exasol");
+    testdbconn.executeQuery("select * from SYS.EXA_ALL_USERS", function (err, res) {
+        console.log(res);
+    });
   
   
-  Output should be `35,666`
 
-
-## Tests
-
-  `npm test`
-
-## Contributing
-
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
